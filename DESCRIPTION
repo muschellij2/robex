@@ -1,6 +1,6 @@
 Type: Package
 Package: robex
-Version: 1.3
+Version: 1.2.2
 Title: Robust Brain Extraction ('ROBEX')
 Description: Wrapper for Robust Brain Extraction ('ROBEX') algorithm
     <DOI:10.1109/TMI.2011.2138152>.  Provides the binary distributions
