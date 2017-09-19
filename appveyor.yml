@@ -46,6 +46,8 @@ environment:
     WARNINGS_ARE_ERORRS: 1.0
     USE_RTOOLS: yes
     R_CHECK_INSTALL_ARGS: --install-args=--build --no-multiarch
+    TMPDIR: C:/
+    TMP: C:/
 
 deploy:
   provider: GitHub
