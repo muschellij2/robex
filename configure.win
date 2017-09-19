@@ -4,6 +4,7 @@ str='download.file('
 str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.win.zip"'
 str=${str}', destfile = "ROBEX.zip")'
 Rscript -e "${str}"
-Rscript -e 'unzip("ROBEX.zip", exdir = "inst")'
+Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
+cp ROBEX/* inst/
 rm ROBEX.zip
 
