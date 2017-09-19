@@ -15,6 +15,3 @@ Logical of success/failure
 \description{
 Install ROBEX tools
 }
-\examples{
-install_robex()
-}
