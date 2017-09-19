@@ -2,3 +2,8 @@
 .RData
 .Rproj.user
 inst/doc
+inst/dat
+inst/ref_vols
+inst/runROBEX.sh
+inst/ROBEX
+src/
