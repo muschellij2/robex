@@ -24,7 +24,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-NeedsCompilation: true
+NeedsCompilation: yes
 Remotes: muschellij2/neurobase, stnava/ITKR
 VignetteBuilder: knitr
 BugReports: https://github.com/muschellij2/robex/issues
