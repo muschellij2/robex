@@ -1,0 +1,39 @@
+#!/bin/bash
+CXX_STD=CXX11
+
+ITKRCMAKE=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkIncludes(); cat(a)'`
+ITKRLIB=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkLibs(); cat(a)'`
+compflags=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkCompileFlags(); cat(a)'`
+ITKDIR=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkDir(); cat(a)'`
+
+CMAKE_BUILD_TYPE=Release
+
+str='download.file('
+str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip"'
+str=${str}', destfile = "ROBEX.zip")'
+Rscript -e "${str}"
+
+Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
+
+mkdir -p src
+cd src/
+
+echo "CXX_STD = CXX11" > Makevars
+
+echo ".PHONY: all libs" >> Makevars
+
+echo "all: \$(SHLIB)" >> Makevars
+
+echo "\$(SHLIB): libs" >> Makevars
+
+echo "libs: ; \$(MAKE) -j 2 && \$(MAKE) all install" >> Makevars
+
+# mkdir -p build
+# cd build
+cmake -DITK_DIR:PATH="${ITKDIR}" \
+    -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/libs/"  \
+    -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" ../ROBEX
+cd ../
+
+# needed for warning
+rm -rf ROBEX

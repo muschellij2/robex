@@ -1,0 +1,64 @@
+#' Executes Robust Brain Extraction
+#' @param infile Input filename
+#' @param outfile Output skull-stripped file
+#' @param verbose print diagnostic messages
+#' @param ... arguments to be passed to \code{\link{system}}
+#' @return List of result of \code{system} command,
+#' names of input and output file
+#' @export
+#' @examples
+#' if (requireNamespace("kirby21.t1")) {
+#'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
+#'    if (is.null(infile)) {
+#'       kirby21.t1::download_t1_data()
+#'    }
+#'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
+#'    if (!is.null(infile)) {
+#'      if (file.exists(infile)) {
+#'        result = robex(infile = infile)
+#'        stopifnot(file.exists(outfile))
+#'      }
+#'    }
+#' }
+#' @importFrom neurobase checkimg
+robex = function(
+  infile,
+  outfile = tempfile(fileext = ".nii.gz"),
+  verbose = TRUE,
+  ...){
+
+
+  infile = neurobase::checkimg(infile)
+  xinfile = infile
+  infile = shQuote(infile)
+  xoutfile = outfile
+  outfile = shQuote(outfile)
+
+  install_robex()
+
+  cmd = robex_cmd()
+
+  owd = getwd()
+  on.exit({
+    setwd(owd)
+  })
+  dn = dirname(cmd)
+  setwd(dn)
+
+  cmd = paste0(cmd, " ", infile, " ", outfile)
+  if (verbose) {
+    message(cmd)
+  }
+  res = system(cmd, ...)
+  if (res != 0) {
+    warning("ROBEX result indicated an error!  Please check resutls.")
+  }
+  if (!file.exists(xoutfile)) {
+    warning("ROBEX result image not found!  Please check resutls.")
+  }
+  return(
+    list(result = res,
+         infile = xinfile,
+         outfile = xoutfile)
+  )
+} ## end robex

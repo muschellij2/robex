@@ -1,0 +1,15 @@
+structure(list(iglesias2011robust = structure(list(title = "Robust brain extraction across datasets and comparison with publicly available methods", 
+    author = structure(list(structure(list(given = c("Juan", 
+    "Eugenio"), family = "Iglesias", role = NULL, email = NULL, 
+        comment = NULL), .Names = c("given", "family", "role", 
+    "email", "comment")), structure(list(given = "Cheng-Yi", 
+        family = "Liu", role = NULL, email = NULL, comment = NULL), .Names = c("given", 
+    "family", "role", "email", "comment")), structure(list(given = c("Paul", 
+    "M"), family = "Thompson", role = NULL, email = NULL, comment = NULL), .Names = c("given", 
+    "family", "role", "email", "comment")), structure(list(given = "Zhuowen", 
+        family = "Tu", role = NULL, email = NULL, comment = NULL), .Names = c("given", 
+    "family", "role", "email", "comment"))), class = "person"), 
+    journal = "IEEE transactions on medical imaging", volume = "30", 
+    number = "9", pages = "1617--1634", year = "2011", publisher = "IEEE"), .Names = c("title", 
+"author", "journal", "volume", "number", "pages", "year", "publisher"
+), bibtype = "Article", key = "iglesias2011robust")), .Names = "iglesias2011robust", class = "bibentry")
