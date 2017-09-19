@@ -39,12 +39,13 @@ robex = function(
 
   cmd = robex_cmd()
 
-#   owd = getwd()
-#   on.exit({
-#     setwd(owd)
-#   })
-#   dn = dirname(cmd)
-#   setwd(dn)
+  # need this for the ref_vols and such
+  owd = getwd()
+  on.exit({
+    setwd(owd)
+  })
+  dn = dirname(cmd)
+  setwd(dn)
 
   cmd = paste0(cmd, " ", infile, " ", outfile)
   if (verbose) {
