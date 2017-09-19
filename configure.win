@@ -6,5 +6,4 @@ str=${str}', destfile = "ROBEX.zip")'
 Rscript -e "${str}"
 Rscript -e 'unzip("ROBEX.zip", exdir = "inst")'
 rm ROBEX.zip
-cp ROBEX/* inst/
 
