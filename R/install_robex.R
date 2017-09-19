@@ -3,10 +3,10 @@
 #' @param ... arguments to pass to \code{\link{system.file}}
 
 #' @importFrom utils download.file unzip untar
-#' @export
-#' @return Logical of success/failure
 #' @examples
 #' install_robex()
+#' @return Logical of success/failure
+## #' @export
 install_robex = function(...){
   robex = robex_cmd(...)
 

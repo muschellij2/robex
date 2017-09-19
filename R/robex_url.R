@@ -2,7 +2,7 @@
 #' @description Returns a URL for the ROBEX executable
 #'
 #' @return Character vector of URL
-#' @export
+### #' @export
 robex_url = function() {
   url = "http://johnmuschelli.com/robex/"
   ver = robex_version()

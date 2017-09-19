@@ -1,6 +1,4 @@
 #!/bin/bash
-CXX_STD=CXX11
-
 ITKRCMAKE=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkIncludes(); cat(a)'`
 ITKRLIB=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkLibs(); cat(a)'`
 compflags=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkCompileFlags(); cat(a)'`
@@ -8,32 +6,39 @@ ITKDIR=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkDir(); cat(a)'`
 
 CMAKE_BUILD_TYPE=Release
 
+
 str='download.file('
 str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip"'
 str=${str}', destfile = "ROBEX.zip")'
 Rscript -e "${str}"
 
 Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
+rm ROBEX.zip
+
+cp -r ROBEX/dat/* inst/dat/
+cp -r ROBEX/ref_vols/* inst/ref_vols/
+cp ROBEX/runROBEX.sh inst/
 
 mkdir -p src
 cd src/
 
-echo "CXX_STD = CXX11" > Makevars
+# make sure these are tabs
+echo "all:"  > Makefile
+echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/"  >> Makefile
+echo "clean:" >> Makefile
+echo "	rm -rf ROBEX/" >> Makefile
 
-echo ".PHONY: all libs" >> Makevars
+# echo "ROBEX: \$(MAKE) -j 2 &&  \$(MAKE) all install" > Makevars
 
-echo "all: \$(SHLIB)" >> Makevars
+mkdir -p build
+cd build
+#     -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/inst/"  \
 
-echo "\$(SHLIB): libs" >> Makevars
-
-echo "libs: ; \$(MAKE) -j 2 && \$(MAKE) all install" >> Makevars
-
-# mkdir -p build
-# cd build
 cmake -DITK_DIR:PATH="${ITKDIR}" \
-    -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/libs/"  \
-    -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" ../ROBEX
-cd ../
+    -DCMAKE_EXE_LINKER_FLAGS:STRING=-lstdc++ \
+    -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" ../../ROBEX
+cd ../../
 
 # needed for warning
-rm -rf ROBEX
+# rm -rf ROBEX
+

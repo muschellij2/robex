@@ -21,6 +21,7 @@
 #'    }
 #' }
 #' @importFrom neurobase checkimg
+#' @import ITKR
 robex = function(
   infile,
   outfile = tempfile(fileext = ".nii.gz"),
@@ -38,12 +39,12 @@ robex = function(
 
   cmd = robex_cmd()
 
-  owd = getwd()
-  on.exit({
-    setwd(owd)
-  })
-  dn = dirname(cmd)
-  setwd(dn)
+#   owd = getwd()
+#   on.exit({
+#     setwd(owd)
+#   })
+#   dn = dirname(cmd)
+#   setwd(dn)
 
   cmd = paste0(cmd, " ", infile, " ", outfile)
   if (verbose) {

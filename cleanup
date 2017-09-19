@@ -1,0 +1,7 @@
+#!/bin/sh
+rm -f -r src/* 
+rm -fr ROBEX
+rm -rf inst/dat/*
+rm -rf inst/ref_vols/*
+rm -rf inst/runROBEX.sh
+rm -f inst/ROBEX
