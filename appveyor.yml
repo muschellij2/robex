@@ -25,6 +25,7 @@ test_script:
   - ls
 
 on_failure:
+  - cat *.Rcheck/00install.out
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
 
