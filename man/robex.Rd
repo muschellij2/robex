@@ -32,7 +32,7 @@ if (requireNamespace("kirby21.t1")) {
    if (!is.null(infile)) {
      if (file.exists(infile)) {
        result = robex(infile = infile)
-       stopifnot(file.exists(outfile))
+       stopifnot(file.exists(result$outfile))
      }
    }
 }

@@ -5,6 +5,6 @@ str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.win.zip"'
 str=${str}', destfile = "ROBEX.zip")'
 Rscript -e "${str}"
 Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
-cp ROBEX/* inst/
+cp -r ROBEX/* inst/
 rm ROBEX.zip
 
