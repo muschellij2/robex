@@ -15,6 +15,8 @@ Rscript -e "${str}"
 Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
 rm ROBEX.zip
 
+mkdir -p inst/dat
+mkdir -p inst/ref_vols/
 cp -r ROBEX/dat/* inst/dat/
 cp -r ROBEX/ref_vols/* inst/ref_vols/
 cp ROBEX/runROBEX.sh inst/
