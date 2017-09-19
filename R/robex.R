@@ -7,6 +7,7 @@
 #' names of input and output file
 #' @export
 #' @examples
+#' result = robex(infile = "", outfile = "")
 #' if (requireNamespace("kirby21.t1")) {
 #'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
 #'    if (is.null(infile)) {
