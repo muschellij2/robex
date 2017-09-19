@@ -2,3 +2,8 @@
 .RData
 .Rproj.user
 inst/doc
+ROBEX/
+inst/*
+vignettes/*
+tests/*
+src/*
