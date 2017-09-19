@@ -37,6 +37,7 @@ robex = function(
   if (.Platform$OS.type == "windows") {
     outfile = gsub("\\", "/", outfile, fixed = TRUE)
     outfile = gsub("/+", "/", outfile)
+    outfile = gsub("/", "\\\\", outfile)
   }
   outfile = shQuote(outfile)
 
