@@ -34,6 +34,9 @@ robex = function(
   xinfile = infile
   infile = shQuote(infile)
   xoutfile = outfile
+  if (.Platform$OS.type == "windows") {
+    outfile = gsub("\\", "/", outfile)
+  }
   outfile = shQuote(outfile)
 
   install_robex()
@@ -47,6 +50,8 @@ robex = function(
   })
   dn = dirname(cmd)
   setwd(dn)
+  # we can just use this because may have weird things in library for windows
+  cmd = file.path(".", basename(cmd))
 
   cmd = paste0(cmd, " ", infile, " ", outfile)
   if (verbose) {
