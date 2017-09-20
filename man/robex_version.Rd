@@ -12,3 +12,6 @@ Character vector of version
 \description{
 ROBEX Version
 }
+\examples{
+robex_version()
+}

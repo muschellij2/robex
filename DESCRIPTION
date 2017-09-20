@@ -1,13 +1,13 @@
 Type: Package
 Package: robex
-Version: 1.2.2
+Version: 1.2.3
 Title: Robust Brain Extraction ('ROBEX')
 Description: Wrapper for Robust Brain Extraction ('ROBEX') algorithm
     <DOI:10.1109/TMI.2011.2138152>.  Provides the binary distributions
     from 'NITRC'.
 Authors@R: structure(list(structure(list(given = "John", family = "Muschelli", 
-    role = c("aut", "cre"), email = "muschellij2@gmail.com", comment = NULL), 
-    .Names = c("given", "family", "role", "email", "comment"))), 
+    role = c("aut", "cre"), email = "muschellij2@gmail.com"), 
+    .Names = c("given", "family", "role", "email"))), 
     class = "person")
 Maintainer: John Muschelli <muschellij2@gmail.com>
 License: BSD_2_clause + file LICENSE
@@ -18,7 +18,6 @@ Suggests:
     testthat,
     kirby21.t1
 Imports:
-    utils,
     neurobase,
     ITKR
 Encoding: UTF-8
