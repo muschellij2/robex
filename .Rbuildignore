@@ -6,3 +6,5 @@
 ^\.travis\.yml$
 R/install_robex\.R
 R/robex_url\.R
+install_robex\.R
+robex_url\.R
