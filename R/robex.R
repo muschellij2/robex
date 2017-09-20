@@ -41,7 +41,7 @@ robex = function(
   }
   outfile = shQuote(outfile)
 
-  install_robex()
+  # install_robex()
 
   cmd = robex_cmd()
 

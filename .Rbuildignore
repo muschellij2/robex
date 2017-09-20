@@ -4,3 +4,5 @@
 ^README\.Rmd$
 ^appveyor\.yml$
 ^\.travis\.yml$
+R/install_robex\.R
+R/robex_url\.R
