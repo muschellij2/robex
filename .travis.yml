@@ -5,7 +5,6 @@ after_success:
 - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then Rscript -e 'covr::coveralls(type =
   "all")' ; fi
 warnings_are_errors: true
-dist: precise
 os:
 - linux
 - osx
