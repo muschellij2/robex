@@ -10,9 +10,9 @@ CMAKE_BUILD_TYPE=Release
 str='download.file('
 str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip"'
 str=${str}', destfile = "ROBEX.zip")'
-Rscript -e "${str}"
+"${R_HOME}/bin/Rscript" -e "${str}"
 
-Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
+"${R_HOME}/bin/Rscript" -e 'unzip("ROBEX.zip", exdir = ".")'
 rm ROBEX.zip
 
 mkdir -p inst/dat
