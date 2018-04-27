@@ -3,8 +3,8 @@
 str='download.file('
 str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.win.zip"'
 str=${str}', destfile = "ROBEX.zip")'
-Rscript -e "${str}"
-Rscript -e 'unzip("ROBEX.zip", exdir = ".")'
+${R_HOME}/bin/Rscript.exe -e "${str}"
+${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
 cp -r ROBEX/* inst/
 rm ROBEX.zip
 
