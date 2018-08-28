@@ -8,12 +8,19 @@
 #' @export
 #' @examples
 #' result = robex(infile = "", outfile = "")
+#'
 #' if (requireNamespace("kirby21.t1")) {
 #'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
 #'    if (is.null(infile)) {
-#'       try({kirby21.t1::download_t1_data()})
+#'    infile = ""
 #'    }
-#'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
+#'    if (!file.exists(infile)) {
+#'       outdir = tempdir()
+#'       try({kirby21.t1::download_t1_data(outdir = outdir)})
+#'      infile = kirby21.t1::get_t1_filenames(
+#'      id = "113", visit = 1,
+#'      outdir = outdir)
+#'    }
 #'    if (!is.null(infile)) {
 #'      if (file.exists(infile)) {
 #'        result = robex(infile = infile)
