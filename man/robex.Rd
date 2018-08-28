@@ -4,7 +4,8 @@
 \alias{robex}
 \title{Executes Robust Brain Extraction}
 \usage{
-robex(infile, outfile = tempfile(fileext = ".nii.gz"), verbose = TRUE, ...)
+robex(infile, outfile = tempfile(fileext = ".nii.gz"), verbose = TRUE,
+  ...)
 }
 \arguments{
 \item{infile}{Input filename}
