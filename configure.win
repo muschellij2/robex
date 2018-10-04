@@ -1,8 +1,8 @@
 #!/bin/bash
 
-str='download.file('
-str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.win.zip"'
-str=${str}', destfile = "ROBEX.zip")'
+str="download.file("
+str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.win.zip'"
+str=${str}", destfile = 'ROBEX.zip')"
 ${R_HOME}/bin/Rscript.exe -e "${str}"
 ${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
 cp -r ROBEX/* inst/
