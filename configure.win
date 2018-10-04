@@ -4,7 +4,7 @@
 # str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.win.zip'"
 # str=${str}", destfile = 'ROBEX.zip')"
 # ${R_HOME}/bin/Rscript.exe -e "${str}"
-# ${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
+# ${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = getwd())'
 # cp -r ROBEX/* inst/
 # rm ROBEX.zip
 
@@ -22,7 +22,7 @@ str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip'"
 str=${str}", destfile = 'ROBEX.zip')"
 "${R_HOME}"/bin/Rscript.exe -e "${str}"
 
-"${R_HOME}"/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
+"${R_HOME}"/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = getwd())'
 rm ROBEX.zip
 
 mkdir -p inst/dat
