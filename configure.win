@@ -37,10 +37,10 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-echo "all:"  > Makefile
-echo "	cd build && mingw32-make.exe && chmod +x ROBEX && cp ROBEX ../../inst/"  >> Makefile
-echo "clean:" >> Makefile
-echo "	rm -rf ROBEX/" >> Makefile
+echo "all:"  > Makefile.win
+echo "	cd build && mingw32-make.exe && chmod +x ROBEX && cp ROBEX ../../inst/"  >> Makefile.win
+echo "clean:" >> Makefile.win
+echo "	rm -rf ROBEX/" >> Makefile.win
 
 # echo "ROBEX: \$(MAKE) -j 2 &&  \$(MAKE) all install" > Makevars
 
