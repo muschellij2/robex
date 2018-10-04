@@ -1,10 +1,60 @@
 #!/bin/bash
 
-str="download.file("
-str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.win.zip'"
+# str="download.file("
+# str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.win.zip'"
+# str=${str}", destfile = 'ROBEX.zip')"
+# ${R_HOME}/bin/Rscript.exe -e "${str}"
+# ${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
+# cp -r ROBEX/* inst/
+# rm ROBEX.zip
+
+#!/bin/bash
+ITKRCMAKE=`${R_HOME}/bin/Rscript.exe -e 'a<-ITKR:::itkIncludes(); cat(a)'`
+ITKRLIB=`${R_HOME}/bin/Rscript.exe -e 'a<-ITKR:::itkLibs(); cat(a)'`
+compflags=`${R_HOME}/bin/Rscript.exe -e 'a<-ITKR:::itkCompileFlags(); cat(a)'`
+ITKDIR=`${R_HOME}/bin/Rscript.exe -e 'a<-ITKR:::itkDir(); cat(a)'`
+
+CMAKE_BUILD_TYPE=Release
+
+
+str='download.file('
+str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip'"
 str=${str}", destfile = 'ROBEX.zip')"
-${R_HOME}/bin/Rscript.exe -e "${str}"
-${R_HOME}/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
-cp -r ROBEX/* inst/
+"${R_HOME}"/bin/Rscript.exe -e "${str}"
+
+"${R_HOME}"/bin/Rscript.exe -e 'unzip("ROBEX.zip", exdir = ".")'
 rm ROBEX.zip
+
+mkdir -p inst/dat
+mkdir -p inst/ref_vols/
+cp -r ROBEX/dat/* inst/dat/
+cp -r ROBEX/ref_vols/* inst/ref_vols/
+cp ROBEX/runROBEX.sh inst/
+
+mkdir -p src
+cd src/
+
+# make sure these are tabs
+echo "all:"  > Makefile
+echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/"  >> Makefile
+echo "clean:" >> Makefile
+echo "	rm -rf ROBEX/" >> Makefile
+
+# echo "ROBEX: \$(MAKE) -j 2 &&  \$(MAKE) all install" > Makevars
+
+mkdir -p build
+cd build
+#     -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/inst/"  \
+
+cmake \
+   -G "MinGW Makefiles" \
+    -DCMAKE_SH:BOOL=OFF \
+    -DITK_DIR:PATH="${ITKDIR}" \
+    -DCMAKE_EXE_LINKER_FLAGS:STRING=-lstdc++ \
+    -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" \
+    ../../ROBEX
+cd ../../
+
+# needed for warning
+# rm -rf ROBEX
 
