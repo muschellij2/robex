@@ -6,10 +6,16 @@ init:
     
 install:
   ps: Bootstrap
-cache: C:\RLibrary
+
+cache:
+  - C:\RLibrary
 
 # Adapt as necessary starting from here
 build_script:
+  - if not exist "C:\rtm" mkdir C:\rtm
+  - set TMP=C:/rtm
+  - set TEMP=C:/rtm
+  - set TMPDIR=C:/rtm  
   - ls
   - ps: Invoke-WebRequest https://github.com/muschellij2/ITKR/releases/download/v0.4.17.1.0/ITKR_0.4.17.1_R3.5.zip -OutFile ".\ITKR.zip"  
   - Rscript -e "install.packages('ITKR.zip', repos = NULL)"  
@@ -46,8 +52,6 @@ environment:
     WARNINGS_ARE_ERORRS: 1.0
     USE_RTOOLS: yes
     R_CHECK_INSTALL_ARGS: --install-args=--build --no-multiarch
-    TMPDIR: C:/
-    TMP: C:/
   matrix:
     - R_VERSION: release
       R_VER: 3.5    
