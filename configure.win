@@ -47,7 +47,7 @@ echo "	rm -rf ROBEX/" >> Makefile
 mkdir -p build
 cd build
 
-cmake \
+cmake.exe \
    -G "MinGW Makefiles" \
     -DCMAKE_SH:BOOL=OFF \
     -DITK_DIR:PATH="${ITKDIR}" \
