@@ -1,38 +1,57 @@
 language: R
 sudo: false
 cache: packages
-after_success:
-- if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then Rscript -e 'covr::coveralls(type =
-  "all")' ; fi
 warnings_are_errors: true
+use_bioc: true
+bioc_required: true
+cran: http://cran.rstudio.com
+
+latex: false
+compiler: clang
+osx_image: xcode9
+
+
 os:
-- linux
-- osx
+  - linux
+  - osx
 
 r:
-  - 3.4
-  - 3.5
+  - oldrel  
+  - release
+  - devel
+
+matrix: 
+  allow_failures:
+    - r: devel
 
 before_deploy: if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -f *.tar.gz; fi
 r_check_args: "--as-cran --install-args=--build"
 before_install:
+- export LD_LIBRARY_PATH=/usr/local/clang/lib:${LD_LIBRARY_PATH}
 - export PROJ_DIR=`basename $PWD`
 - fname=travis_helpers.sh
 - wget -O ${fname} http://bit.ly/travis_helpers
 - cat ${fname}; source ${fname}; rm ${fname}
+- export rver=`r_version`;
+- export gh_user=`get_gh_user` ; echo $gh_user ;
 - cat DESCRIPTION
 - export PACKAGE_NAME=`package_name`
-- Rscript -e 'source("https://install-github.me/mangothecat/callr")'
 - remove_neuroc_packages
 - export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
 - x=`export_clang_cxx`; eval ${x}
+- x=`export_clang_cxx`; eval ${x}
+- if [ "$TRAVIS_OS_NAME" = "osx" ];
+  then
+    no_open_mp ; 
+  fi  
 - echo "CC=${CC}, CXX=${CXX}, CXX1X=${CXX1X}"
 - echo "CXX1XSTD=${CXX1XSTD}, CXX11=${CXX11}"
 - clang_cxx
-- export cmake_version="3.4"
+- export cmake_version="3.11"
 - cmake --version
 - x=`cmake_setup`; echo "${x}"; eval ${x};
 - cmake --version
+- ./cleanup
 - export ants_user=stnava
 - install_missing_remote_deps ${ants_user}/ITKR
 - echo "Done Installing Missing Deps"
@@ -42,14 +61,18 @@ before_install:
 - cat DESCRIPTION
 - echo $PATH ;
 
+after_success:
+- if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then Rscript -e 'covr::coveralls(type =
+  "all")' ; fi
+
 deploy:
   provider: releases
   skip_cleanup: yes
   file_glob: yes
-  file: robex*.t*gz
+  file: ${PACKAGE_NAME}*.t*gz
   api_key:
     secure: 3IaJUUQ69bNh0GEtkvK7Q15DRaBg/u0Bcyx6fwL1qCFOlC5lvMjy1EeagjxHrwsIEcwNYBmxqK4FbN5QsbWGT7T5VgfPY/MtEoWP4GoiVwwKKjIfve9i2ljvSzkgXghtbD1dJrNxBFeDyvcr281kOwZzjlcDnAKsziXyRppDLVgkcyWc3FlSJMFrpV2rU6Pl/whdcj3BxxuqbhsLXXCFhYmPvx0dJZ9Sx5GZkZ1Wt2Pc+sZSnRYf9MgbS77KiUvygdFc+gkWCufWeAzVrm9Trd3SlmNQiErg0QECX7JfjquFV68RqDGG3J7J3v54mN1zlz2q3QYFInyFVwqhGD3uwEajlNPvmcOqVTaAAQJliCur/tyK7q3lZ4m0U04Lo6zkr56YpE63UgaBDRebPyHQyihD2ffVpy/i/YCdWWkYBuyvR7b4ov6t78iYoCu9JlQ9H3RWjZy6z2Le3Q5Mttyh6CjrVAMWUPPVQ+5dKLdnqaxuX9pPR5GbTP9wZnNBPPmTmcsRUu2y+lHePDDm3lc1PZsjEuK1G2mIw3dw/s0P//u7cXcXF5AJebFNdJlpkd7mbkl4QKzmg8lbr0/6Unwsbrq6QjB2yUgX1p3BIiDm5uhXuKc+fMHaFOLRTmM+y7bQVGPgdRL9fMVwwxeDZGeDnMWrRlPgcTijlkO9qUdWGeo=  
   on:
     tags: yes
-    repo: muschellij2/robex
+    repo: ${gh_user}/robex
 
