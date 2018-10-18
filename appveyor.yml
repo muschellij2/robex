@@ -17,7 +17,7 @@ build_script:
   - set TEMP=C:/rtm
   - set TMPDIR=C:/rtm  
   - ls
-  - Progress "Downloading and installing travis_helpers"
+  - echo "Downloading and installing travis_helpers"
   - Invoke-WebRequest http://bit.ly/travis_helpers -OutFile "..\travis_helpers.sh"
   - echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
   - bash -c "echo '^travis_helpers\.sh\.cmd$' >> .Rbuildignore"
