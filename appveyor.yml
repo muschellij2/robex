@@ -19,7 +19,7 @@ build_script:
   - ls
   - echo "Downloading and installing travis_helpers"
   - ps: Invoke-WebRequest http://bit.ly/travis_helpers -OutFile "..\travis_helpers.sh"
-  - echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
+  - ps: echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
   - bash -c "echo '^travis_helpers\.sh\.cmd$' >> .Rbuildignore"
   - travis_helpers.sh install_missing_remote_deps stnava/ITKR
   - travis_helpers.sh gh_binary_install ${ants_user}/ITKR ;  
