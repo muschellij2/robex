@@ -18,6 +18,7 @@ build_script:
   - set TMPDIR=C:/rtm  
   - ls
   - echo "Downloading and installing travis_helpers"
+  - Rscript -e "install.packages('Rcpp', repos = c(CRAN='http://cran.rstudio.com'))" 
   - ps: Invoke-WebRequest http://bit.ly/travis_helpers -OutFile "..\travis_helpers.sh"
   - ps: echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
   - bash -c "echo '^travis_helpers\.sh\.cmd$' >> .Rbuildignore"
