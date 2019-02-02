@@ -23,7 +23,7 @@ build_script:
   - ps: echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
   - bash -c "echo '^travis_helpers\.sh\.cmd$' >> .Rbuildignore"
   - travis_helpers.sh install_missing_remote_deps stnava/ITKR
-  - travis_helpers.sh gh_binary_install ${ants_user}/ITKR ;  
+  - travis_helpers.sh gh_binary_install muschellij2/ITKR ;  
   - Rscript -e "devtools::session_info('ITKR')";
   # - ps: Invoke-WebRequest https://github.com/muschellij2/ITKR/releases/download/v0.4.17.1.0/ITKR_0.4.17.1_R3.5.zip -OutFile ".\ITKR.zip"  
   # - Rscript -e "install.packages('ITKR.zip', repos = NULL)"  
@@ -57,7 +57,7 @@ artifacts:
 
 environment:
   global:
-    WARNINGS_ARE_ERORRS: 1.0
+    WARNINGS_ARE_ERRORS: 1.0
     USE_RTOOLS: yes
     R_CHECK_INSTALL_ARGS: --install-args=--build --no-multiarch
   matrix:
