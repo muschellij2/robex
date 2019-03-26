@@ -27,6 +27,7 @@ matrix:
 before_deploy: if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -f *.tar.gz; fi
 r_check_args: "--as-cran --install-args=--build"
 before_install:
+- export R_REMOTES_NO_ERRORS_FROM_WARNINGS=true    
 - export LD_LIBRARY_PATH=/usr/local/clang/lib:${LD_LIBRARY_PATH}
 - export PROJ_DIR=`basename $PWD`
 - fname=travis_helpers.sh
