@@ -24,7 +24,7 @@ build_script:
   - ps: echo '@bash.exe ../travis_helpers.sh %*' | Out-File -Encoding ASCII .\travis_helpers.sh.cmd
   - bash -c "echo '^travis_helpers\.sh\.cmd$' >> .Rbuildignore"
   - sh: export PACKAGE_NAME=`travis_helpers.sh package_name`
-  - if "%PACKAGE_NAME%" != "ITKR" (
+  - if ["%PACKAGE_NAME%"]!=["ITKR"] (
       travis_helpers.sh install_missing_remote_deps muschellij2/ITKR;
       travis_helpers.sh gh_binary_install muschellij2/ITKR;
     )
