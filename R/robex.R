@@ -41,6 +41,9 @@ robex = function(
   xinfile = infile
   infile = shQuote(infile)
   xoutfile = outfile
+  outfile = file.path(
+    tools::file_path_as_absolute(dirname(outfile)),
+    basename(outfile))
   if (.Platform$OS.type == "windows") {
     outfile = gsub("\\", "/", outfile, fixed = TRUE)
     outfile = gsub("/+", "/", outfile)
