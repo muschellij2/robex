@@ -11,3 +11,7 @@ robex_url\.R
 ROBEX/
 appveyor.yml
 robex.Rproj
+^README\.html$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
