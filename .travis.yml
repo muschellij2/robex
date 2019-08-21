@@ -5,6 +5,10 @@ warnings_are_errors: true
 use_bioc: true
 bioc_required: true
 cran: http://cran.rstudio.com
+dist: xenial
+
+services:
+  - xvfb
 
 latex: false
 compiler: clang
@@ -27,19 +31,25 @@ matrix:
 before_deploy: if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -f *.tar.gz; fi
 r_check_args: "--as-cran --install-args=--build"
 before_install:
+- ulimit -n 2048  
 - export R_REMOTES_NO_ERRORS_FROM_WARNINGS=true    
 - export LD_LIBRARY_PATH=/usr/local/clang/lib:${LD_LIBRARY_PATH}
 - export PROJ_DIR=`basename $PWD`
+- export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
 - fname=travis_helpers.sh
 - wget -O ${fname} http://bit.ly/travis_helpers
 - cat ${fname}; source ${fname}; rm ${fname}
+- codename=`linux_codename`;
+- if [ "${codename}" = "trusty" ];
+  then
+     start_xvfb ;
+  fi  
 - export rver=`r_version`;
 - export gh_user=`get_gh_user` ; echo $gh_user ;
 - cat DESCRIPTION
 - export PACKAGE_NAME=`package_name`
 - remove_neuroc_packages
-- export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
-- x=`export_clang_cxx`; eval ${x}
+# does all the clang exports  
 - x=`export_clang_cxx`; eval ${x}
 - if [ "$TRAVIS_OS_NAME" = "osx" ];
   then
@@ -48,12 +58,14 @@ before_install:
 - echo "CC=${CC}, CXX=${CXX}, CXX1X=${CXX1X}"
 - echo "CXX1XSTD=${CXX1XSTD}, CXX11=${CXX11}"
 - clang_cxx
-- export cmake_version="3.11"
+- hdf5_install ;
+- export cmake_version="3.14"
 - cmake --version
 - x=`cmake_setup`; echo "${x}"; eval ${x};
 - cmake --version
 - ./cleanup
 - export ants_user=stnava
+- Rscript -e "install.packages(c('Rcpp', 'RcppEigen'), type = 'source', repos=c(CRAN='https://cran.rstudio.com'))"
 - install_missing_remote_deps ${ants_user}/ITKR
 - echo "Done Installing Missing Deps"
 - gh_binary_install ${ants_user}/ITKR ;
@@ -63,8 +75,10 @@ before_install:
 - echo $PATH ;
 
 after_success:
-- if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then Rscript -e 'covr::coveralls(type =
-  "all")' ; fi
+- if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; 
+  then 
+    Rscript -e 'covr::coveralls(type = "all")' ; 
+  fi
 
 deploy:
   provider: releases
