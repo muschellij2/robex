@@ -26,10 +26,10 @@ Executes Robust Brain Extraction
 \examples{
 result = robex(infile = "", outfile = "")
 
-if (requireNamespace("kirby21.t1")) {
+if (requireNamespace("kirby21.t1", quietly = TRUE)) {
    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
    if (is.null(infile)) {
-   infile = ""
+      infile = ""
    }
    if (!file.exists(infile)) {
       outdir = tempdir()

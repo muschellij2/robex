@@ -9,10 +9,10 @@
 #' @examples
 #' result = robex(infile = "", outfile = "")
 #'
-#' if (requireNamespace("kirby21.t1")) {
+#' if (requireNamespace("kirby21.t1", quietly = TRUE)) {
 #'    infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
 #'    if (is.null(infile)) {
-#'    infile = ""
+#'       infile = ""
 #'    }
 #'    if (!file.exists(infile)) {
 #'       outdir = tempdir()
@@ -37,20 +37,27 @@ robex = function(
   ...){
 
 
-  infile = neurobase::checkimg(infile)
   xinfile = infile
-  infile = shQuote(infile)
-  xoutfile = outfile
-  outfile = path.expand(outfile)
-  outfile = normalizePath(outfile, "/")
-  outfile = file.path(normalizePath(dirname(outfile), "/"),
-                      basename(outfile))
-  if (.Platform$OS.type == "windows") {
-    outfile = gsub("\\", "/", outfile, fixed = TRUE)
-    outfile = gsub("/+", "/", outfile)
-    outfile = gsub("/", "\\\\", outfile)
+  if (file.exists(infile)) {
+    infile = neurobase::checkimg(infile)
+    infile = normalizePath(infile)
+    infile = shQuote(infile)
   }
-  outfile = shQuote(outfile)
+  xoutfile = outfile
+  if (length(outfile) > 0) {
+    if (nchar(outfile) > 0) {
+      outfile = path.expand(outfile)
+      outfile = normalizePath(outfile, winslash = "/")
+      outfile = file.path(normalizePath(dirname(outfile), "/"),
+                          basename(outfile))
+      if (.Platform$OS.type == "windows") {
+        outfile = gsub("\\", "/", outfile, fixed = TRUE)
+        outfile = gsub("/+", "/", outfile)
+        outfile = gsub("/", "\\\\", outfile)
+      }
+      outfile = shQuote(outfile)
+    }
+  }
 
   # install_robex()
 
@@ -83,3 +90,4 @@ robex = function(
          outfile = xoutfile)
   )
 } ## end robex
+
