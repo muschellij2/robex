@@ -78,7 +78,7 @@ deploy:
   auth_token:
     secure: tc2Va9OWLH9H/uKPUKCUmv+q+wQpzRVJd6t8ckXjqzGnOo9eWyiQCmuuUjcuM3b8
   draft: false
-  prerelease: falase
+  prerelease: false
   on:
     appveyor_repo_tag: true
 
