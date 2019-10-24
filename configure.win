@@ -37,7 +37,8 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-echo "all:"  > Makefile.win
+echo "CXXFLAGS = ${CXXFLAGS} -Wno-inconsistent-missing-override" > Makefile.win
+echo "all:"  >> Makefile.win
 echo "	cd build && mingw32-make.exe && chmod +x ROBEX.exe && cp ROBEX.exe ../../inst/ && rm -rf ../build/*"  >> Makefile.win
 echo "clean:" >> Makefile.win
 echo "	rm -rf ROBEX/" >> Makefile.win
