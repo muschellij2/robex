@@ -25,10 +25,8 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS`
-echo "CXXFLAGS = ${CXXFLAGS} -Wno-inconsistent-missing-override" > Makefile
-CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
-echo "CFLAGS = ${CFLAGS} -Wno-inconsistent-missing-override" >> Makefile
+echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override" > Makefile
+echo "PKG_CFLAGS=-Wno-inconsistent-missing-override" >> Makefile
 echo "all:"  >> Makefile
 echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/ && rm -rf ../build/*"  >> Makefile
 echo "clean:" >> Makefile
