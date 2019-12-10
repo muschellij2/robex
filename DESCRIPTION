@@ -30,3 +30,4 @@ BugReports: https://github.com/muschellij2/robex/issues
 URL: https://www.nitrc.org/projects/robex
 SystemRequirements: git, cmake, GNU make
 RoxygenNote: 6.1.1
+
