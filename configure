@@ -39,6 +39,7 @@ cd build
 #     -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/inst/"  \
 
 cmake -DITK_DIR:PATH="${ITKDIR}" \
+    -DCMAKE_CXX_FLAGS=-Wno-inconsistent-missing-override \
     -DCMAKE_EXE_LINKER_FLAGS:STRING=-lstdc++ \
     -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" ../../ROBEX
 cd ../../
