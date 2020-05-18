@@ -55,6 +55,7 @@ cmake.exe \
     -DITK_DIR:PATH="${ITKDIR}" \
     -DCMAKE_EXE_LINKER_FLAGS:STRING=-lstdc++ \
     -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" \
+    -DCMAKE_CXX_FLAGS=-Wno-inconsistent-missing-override \
     ../../ROBEX
 cd ../../
 
