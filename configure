@@ -25,8 +25,8 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override" > Makefile
-echo "PKG_CFLAGS=-Wno-inconsistent-missing-override" >> Makefile
+echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override -Wunused-result" > Makefile
+echo "PKG_CFLAGS=-Wno-inconsistent-missing-override -Wunused-result" >> Makefile
 echo "ROBEX: build"  >> Makefile
 echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/ && rm -rf ../build/*"  >> Makefile
 echo "clean:" >> Makefile
