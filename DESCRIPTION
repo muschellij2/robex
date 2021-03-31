@@ -5,10 +5,10 @@ Title: Robust Brain Extraction ('ROBEX')
 Description: Wrapper for Robust Brain Extraction ('ROBEX') algorithm
     <DOI:10.1109/TMI.2011.2138152>.  Provides the binary distributions
     from 'NITRC'.
-Authors@R: structure(list(structure(list(given = "John", family = "Muschelli", 
-    role = c("aut", "cre"), email = "muschellij2@gmail.com"), 
-    .Names = c("given", "family", "role", "email"))), 
-    class = "person")
+Authors@R: c(
+    person(given = "John", family = "Muschelli", 
+    role = c("aut", "cre"), email = "muschellij2@gmail.com")
+    )
 Maintainer: John Muschelli <muschellij2@gmail.com>
 License: BSD_2_clause + file LICENSE
 Suggests: 

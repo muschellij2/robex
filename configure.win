@@ -37,8 +37,8 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override -Wunused-result" > Makefile.win
-echo "PKG_CFLAGS=-Wno-inconsistent-missing-override -Wunused-result" >> Makefile.win
+echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override -Wno-unused-result -Wformat-overflow=2" > Makefile.win
+echo "PKG_CFLAGS=-Wno-inconsistent-missing-override -Wno-unused-result -Wformat-overflow=2" >> Makefile.win
 echo "ROBEX.exe: build"  >> Makefile.win
 echo "	cd build && mingw32-make.exe && chmod +x ROBEX.exe && cp ROBEX.exe ../../inst/ && rm -rf ../build/*"  >> Makefile.win
 echo "clean:" >> Makefile.win
