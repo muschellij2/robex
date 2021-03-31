@@ -1,0 +1,59 @@
+---
+title: "Skull Stripping with ROBEX"
+author: "John Muschelli"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Skull Stripping with ROBEX}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Here we will skull strip an image using ROBEX (Robust Brain Extraction).  First, let's load in the packages.
+```{r}
+library(robex)
+library(kirby21.t1)
+library(neurobase)
+```
+
+The `kirby21.t1` package downloads or loads T1-weighted iamges.  Here we will load a filename into the file `infile`:
+```{r}
+infile = kirby21.t1::get_t1_filenames(id = "113", visit = 1)
+if (is.null(infile)) {
+  infile = ""
+}
+if (!file.exists(infile)) {
+  outdir = tempdir()
+  try({kirby21.t1::download_t1_data(outdir = outdir)})
+  infile = kirby21.t1::get_t1_filenames(
+    id = "113", visit = 1,
+    outdir = outdir)
+}
+```
+
+We will read in the file using `neurobase`:
+```{r}
+img = readnii(infile)
+ortho2(img)
+```
+
+
+We will then run `robex::robex` to perform the skull stripping
+```{r}
+if (!is.null(infile)) {
+  if (file.exists(infile)) {
+    result = robex(infile = infile)
+    stopifnot(file.exists(result$outfile))
+  }
+}
+print(result)
+```
+
+
+```{r}
+output = readnii(result$outfile)
+ortho2(output)
+double_ortho(img, output)
+ortho2(robust_window(img), output > 0)
+```
