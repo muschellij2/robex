@@ -38,8 +38,8 @@ robex = function(
 
 
   xinfile = infile
+  infile = neurobase::checkimg(infile)
   if (file.exists(infile)) {
-    infile = neurobase::checkimg(infile)
     infile = normalizePath(infile)
     infile = shQuote(infile)
   }
