@@ -25,8 +25,10 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override -Wno-unused-result -Wno-format-overflow" > Makefile
-echo "PKG_CFLAGS=-Wno-inconsistent-missing-override -Wno-unused-result -Wno-format-overflow" >> Makefile
+all_flags="-Wno-writable-strings -Wno-inconsistent-missing-override -Wno-unused-result -Wno-format-overflow"
+echo "PKG_CXXFLAGS=${all_flags}" > Makefile
+echo "CXXFLAGS=${all_flags}" >> Makefile
+echo "PKG_CFLAGS=${all_flags}" >> Makefile
 echo "ROBEX: build"  >> Makefile
 echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/ && rm -rf ../build/*"  >> Makefile
 echo "clean:" >> Makefile
@@ -39,7 +41,7 @@ cd build
 #     -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}/inst/"  \
 
 cmake -DITK_DIR:PATH="${ITKDIR}" \
-    -DCMAKE_CXX_FLAGS=-Wno-inconsistent-missing-override -Wno-unused-result  -Wno-format-overflow \
+    -DCMAKE_CXX_FLAGS=${all_flags} \
     -DCMAKE_EXE_LINKER_FLAGS:STRING=-lstdc++ \
     -DCMAKE_BUILD_TYPE:STRING="${CMAKE_BUILD_TYPE}" ../../ROBEX
 cd ../../
