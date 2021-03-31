@@ -35,7 +35,7 @@ mkdir -p src
 cd src/
 
 # make sure these are tabs
-all_flags="-Wformat-overflow=0 -Wno-inconsistent-missing-override -Wno-parentheses -Wno-writable-strings  -Wno-unused-result"
+all_flags="-Wformat=0 -Wno-inconsistent-missing-override -Wno-parentheses -Wno-writable-strings  -Wno-unused-result"
 echo "PKG_CXXFLAGS=${all_flags}" > Makefile.win
 echo "CXXFLAGS=${all_flags}" >> Makefile.win
 # echo "PKG_CFLAGS=${all_flags}" >> Makefile.win
