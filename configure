@@ -27,7 +27,7 @@ cd src/
 # make sure these are tabs
 echo "PKG_CXXFLAGS=-Wno-inconsistent-missing-override" > Makefile
 echo "PKG_CFLAGS=-Wno-inconsistent-missing-override" >> Makefile
-echo "all:"  >> Makefile
+echo "all: build"  >> Makefile
 echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/ && rm -rf ../build/*"  >> Makefile
 echo "clean:" >> Makefile
 echo "	rm -rf ROBEX/" >> Makefile
