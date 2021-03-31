@@ -16,7 +16,7 @@ CMAKE_BUILD_TYPE=Release
 
 
 str='options(timeout=200); download.file('
-str=${str}"'http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip'"
+str=${str}"'https://ndownloader.figshare.com/files/27383972'"
 str=${str}", destfile = 'ROBEX.zip', mode = 'wb')"
 "${R_HOME}"/bin/Rscript.exe -e "${str}"
 
