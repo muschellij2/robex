@@ -6,6 +6,7 @@ inst/dat
 inst/ref_vols
 inst/runROBEX.sh
 inst/ROBEX
-src/
+src/build
+src/Makefile
 ROBEX/
 ROBEX.zip
