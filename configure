@@ -28,7 +28,7 @@ cd src/
 all_flags="-Wno-parentheses -Wno-writable-strings -Wno-suggest-override -Wno-inconsistent-missing-override -Wno-unused-result -Wno-format-overflow"
 echo "PKG_CXXFLAGS=${all_flags}" > Makefile
 echo "CXXFLAGS=${all_flags}" >> Makefile
-echo "PKG_CFLAGS=${all_flags}" >> Makefile
+# echo "PKG_CFLAGS=${all_flags}" >> Makefile
 echo "ROBEX: build"  >> Makefile
 echo "	cd build && make && chmod +x ROBEX && cp ROBEX ../../inst/ && rm -rf ../build/*"  >> Makefile
 echo "clean:" >> Makefile
