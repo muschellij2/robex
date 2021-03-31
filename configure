@@ -7,9 +7,9 @@ ITKDIR=`${R_HOME}/bin/Rscript -e 'a<-ITKR:::itkDir(); cat(a)'`
 CMAKE_BUILD_TYPE=Release
 
 
-str='download.file('
+str='options(timeout=200); download.file('
 str=${str}'"http://johnmuschelli.com/robex/ROBEXv12.source.all_platforms.zip"'
-str=${str}', destfile = "ROBEX.zip")'
+str=${str}', destfile = "ROBEX.zip", mode = "wb")'
 "${R_HOME}/bin/Rscript" -e "${str}"
 
 "${R_HOME}/bin/Rscript" -e 'unzip("ROBEX.zip", exdir = ".")'
