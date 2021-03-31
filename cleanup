@@ -1,5 +1,6 @@
 #!/bin/sh
-rm -f -r src/* 
+rm -f -r src/build
+rm -rf src/Makefile
 rm -fr ROBEX
 rm -rf inst/dat/*
 rm -rf inst/ref_vols/*
